@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const express = require("express");
 const TelegramBot = require("node-telegram-bot-api");
 
 const token = process.env.TELEGRAM_BOT_TOKEN;
@@ -45,6 +46,18 @@ bot.on("message", async (msg) => {
       "Отлично! 🏠\n\nСкоро здесь появится пошаговое создание объявления."
     );
   }
+});
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("RealtorAI bot is running");
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`HTTP server is running on port ${PORT}`);
 });
 
 console.log("RealtorAI Telegram bot is running");
